@@ -26,7 +26,7 @@ export function Map() {
                 setUpGeoJson(!upGeoJson);
             });
         }
-    }, [startCoord, endCoord]);
+    }, [startCoord, endCoord, upGeoJson]);
 
     useEffect(() => {
         if(geoJson) {
@@ -50,9 +50,10 @@ export function Map() {
                 });
             });
         }
-    }, [upGeoJson]);
+    }, [upGeoJson, geoJson, startCoord, endCoord, setDist, setNbCharges]);
 
     return (<Map
+    // eslint-disable-next-line
     style="mapbox://styles/mapbox/streets-v9"
     containerStyle={{
         height: '100vh',

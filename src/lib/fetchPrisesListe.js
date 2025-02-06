@@ -42,7 +42,8 @@ async function fetchPrisesListe(path, autonomie, startautonomie = 0) {
                 if(currdist + calcDist(currPos[1], currPos[0], prise.xlongitude, prise.ylatitude) > autonomie){
                     i--;
                     currPos = path[i];
-                }{
+                    // eslint-disable-next-line
+                }{ 
                     prises.push(prise);
                     currdist = 0;
                     priseAdded = true;

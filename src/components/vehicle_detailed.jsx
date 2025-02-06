@@ -12,7 +12,7 @@ export function VehicleDetail(props) {
             });
             setChargeTimeDic(chargeTimeDic);
         }
-    }, []);
+    }, [props]);
 
 
     return (

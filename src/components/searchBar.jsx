@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import { SearchContext } from '../globals';
 import { SearchBox } from '@mapbox/search-js-react';
 
