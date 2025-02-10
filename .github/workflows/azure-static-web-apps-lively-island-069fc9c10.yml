@@ -16,6 +16,7 @@ jobs:
     name: Build and Deploy Job
     env:
       REACT_APP_MAPBOX_TOKEN: ${{ secrets.REACT_APP_MAPBOX_TOKEN }}
+      OPENROUTE_TOKEN: ${{ secrets.OPENROUTE_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
