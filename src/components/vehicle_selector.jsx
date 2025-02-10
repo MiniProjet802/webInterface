@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { fetchVehicleListe, fetchVehicleDetails } from '../lib';
+import { fetchVehicleDetails } from '../lib';
 import { VehicleCard, VehicleDetail, HideButton } from './';
 
 export function VehicleSelector() {
+    // eslint-disable-next-line
     const [vehicleListe, setVehicleListe] = useState([]);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
     const [isVehicleSelected, setIsVehicleSelected] = useState(false);
