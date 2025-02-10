@@ -9,11 +9,11 @@ export function VehicleSelector() {
     const [isHidden, setIsHidden] = useState(false);
 
     useEffect(() => {
-        fetchVehicleListe(0, 100)
-            .then(data => {
-                console.log(data);
-                setVehicleListe(data);
-            });
+        // fetchVehicleListe(0, 100)
+        //     .then(data => {
+        //         console.log(data);
+        //         setVehicleListe(data);
+        //     });
     }, []);
 
     const vehicleSelected = (id) => {

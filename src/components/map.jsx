@@ -26,30 +26,30 @@ export function Map() {
                 setUpGeoJson(!upGeoJson);
             });
         }
-    }, [startCoord, endCoord, upGeoJson]);
+    }, [startCoord, endCoord]);
 
     useEffect(() => {
-        if(geoJson) {
-            fetchPrisesListe(geoJson.features[0].geometry.coordinates, 100)
-            .then((prises, dist) => {
-                console.log(prises);
-                console.log(dist);
-                setDist(dist);
-                setPrises(prises);
-                setNbCharges(prises.length);
-                let coords = [startCoord];
-                prises.forEach(prise => {
-                    coords.push([prise.xlongitude, prise.ylatitude]);
-                });
-                coords.push(endCoord);
-                console.log("cords" ,coords);
-                fetchCorrectedRouteGeoJson(coords)
-                .then(geoJson => {
-                    console.log("corrected", geoJson);
-                    setGeoJson(geoJson);
-                });
-            });
-        }
+        // if(geoJson) {
+        //     fetchPrisesListe(geoJson.features[0].geometry.coordinates, 100)
+        //     .then((prises, dist) => {
+        //         console.log(prises);
+        //         console.log(dist);
+        //         setDist(dist);
+        //         setPrises(prises);
+        //         setNbCharges(prises.length);
+        //         let coords = [startCoord];
+        //         prises.forEach(prise => {
+        //             coords.push([prise.xlongitude, prise.ylatitude]);
+        //         });
+        //         coords.push(endCoord);
+        //         console.log("cords" ,coords);
+        //         fetchCorrectedRouteGeoJson(coords)
+        //         .then(geoJson => {
+        //             console.log("corrected", geoJson);
+        //             setGeoJson(geoJson);
+        //         });
+        //     });
+        // }
     }, [upGeoJson, geoJson, startCoord, endCoord, setDist, setNbCharges]);
 
     return (<Map
