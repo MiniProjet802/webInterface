@@ -3,7 +3,7 @@ import ReactMapboxGl, { GeoJSONLayer, Marker } from 'react-mapbox-gl';
 import startMarqueur from '../assets/marqueur_start.svg';
 import endMarqueur from '../assets/marqueur_end.svg';
 import priseMarqueur from '../assets/marqueur_prise.svg';
-import { fetchRouteGeoJson, fetchPrisesListe, fetchCorrectedRouteGeoJson } from '../lib';
+import { fetchRouteGeoJson } from '../lib';
 import { SearchContext } from '../globals';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -17,6 +17,7 @@ export function Map() {
     const { startCoord, endCoord, setDist, setNbCharges } = useContext(SearchContext);
     const [geoJson, setGeoJson] = useState(null);
     const [upGeoJson, setUpGeoJson] = useState(false);
+    // eslint-disable-next-line
     const [prises, setPrises] = useState([]);
 
     useEffect(() => {
@@ -26,6 +27,7 @@ export function Map() {
                 setUpGeoJson(!upGeoJson);
             });
         }
+        // eslint-disable-next-line
     }, [startCoord, endCoord]);
 
     useEffect(() => {
