@@ -17,6 +17,7 @@ async function fetchRouteData(slat, slon, elat, elon) {
 }
 
 async function fetchCorrectedRouteData(positions) {
+    console.log("positions", positions);
     const response = await fetch(makeCorrectedRouteUrl(), {
         method: 'POST',
         headers: {
@@ -57,10 +58,9 @@ app.http('correctedroute', {
     methods: ['POST'],
     authLevel: 'anonymous',
     handler: async (req, context) => {
-        console.log(req.body);
-    
-        const { positions } = req.body;
-        const data = await fetchCorrectedRouteData(positions);
+        const r = await req.json();
+        console.log(r);
+        const data = await fetchCorrectedRouteData(r.positions);
         console.log(data);
         return {
             status: 200,

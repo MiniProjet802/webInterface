@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "@azure/functions": "^4.0.0",
-    "api": "file:"
+    "api": "file:",
+    "graphql": "^16.10.0",
+    "graphql-tag": "^2.12.6",
+    "urql": "^4.2.1"
   },
   "main": "src/{index.js,functions/*.js}"
 }

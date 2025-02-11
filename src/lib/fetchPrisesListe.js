@@ -1,5 +1,5 @@
 function makeUrl(lat, lon) {
-    return `http://localhost:3001/nearest?lat=${lat}&lon=${lon}`;
+    return `http://localhost:7071/api/prise/nearest?lat=${lat}&lon=${lon}`;
 }
 
 /** calcDist
@@ -25,6 +25,7 @@ async function fetchPrisesListe(path, autonomie, startautonomie = 0) {
     let currPos = path[0];
     let currdist = startautonomie;
     let dist = 0;
+    let totDist = 0;
     while(i < path.length){
         dist = calcDist(currPos[1], currPos[0], path[i][1], path[i][0]);
         if(dist + currdist > autonomie){
@@ -53,9 +54,14 @@ async function fetchPrisesListe(path, autonomie, startautonomie = 0) {
             currdist += dist;
             currPos = path[i];
         }
+        totDist +=dist;
         i++;
     }
-    return (prises, dist);
+    console.log("prises", prises);
+    return {
+        prises: prises,
+        dist: totDist
+    };
 }
 
 export { fetchPrisesListe };

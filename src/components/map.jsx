@@ -3,7 +3,7 @@ import ReactMapboxGl, { GeoJSONLayer, Marker } from 'react-mapbox-gl';
 import startMarqueur from '../assets/marqueur_start.svg';
 import endMarqueur from '../assets/marqueur_end.svg';
 import priseMarqueur from '../assets/marqueur_prise.svg';
-import { fetchRouteGeoJson } from '../lib';
+import { fetchRouteGeoJson, fetchPrisesListe, fetchCorrectedRouteGeoJson } from '../lib';
 import { SearchContext } from '../globals';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -26,33 +26,39 @@ export function Map() {
                 setGeoJson(geoJson);
                 setUpGeoJson(!upGeoJson);
             });
+        }else{
+            setGeoJson(null);
+            setPrises([]);
+            setDist(null);
+            setNbCharges(null);
+            setUpGeoJson(!upGeoJson);
         }
         // eslint-disable-next-line
     }, [startCoord, endCoord]);
 
     useEffect(() => {
-        // if(geoJson) {
-        //     fetchPrisesListe(geoJson.features[0].geometry.coordinates, 100)
-        //     .then((prises, dist) => {
-        //         console.log(prises);
-        //         console.log(dist);
-        //         setDist(dist);
-        //         setPrises(prises);
-        //         setNbCharges(prises.length);
-        //         let coords = [startCoord];
-        //         prises.forEach(prise => {
-        //             coords.push([prise.xlongitude, prise.ylatitude]);
-        //         });
-        //         coords.push(endCoord);
-        //         console.log("cords" ,coords);
-        //         fetchCorrectedRouteGeoJson(coords)
-        //         .then(geoJson => {
-        //             console.log("corrected", geoJson);
-        //             setGeoJson(geoJson);
-        //         });
-        //     });
-        // }
-    }, [upGeoJson, geoJson, startCoord, endCoord, setDist, setNbCharges]);
+        if(geoJson) {
+            fetchPrisesListe(geoJson.features[0].geometry.coordinates, 100)
+            .then((res) => {
+                console.log("res", res);
+                setDist(res.dist);
+                setPrises(res.prises);
+                setNbCharges(res.prises.length);
+                let coords = [startCoord];
+                res.prises.forEach(prise => {
+                    coords.push([prise.xlongitude, prise.ylatitude]);
+                });
+                coords.push(endCoord);
+                console.log("cords" ,coords);
+                fetchCorrectedRouteGeoJson(coords)
+                .then(geoJson => {
+                    console.log("corrected", geoJson);
+                    setGeoJson(geoJson);
+                });
+            });
+        }
+        // eslint-disable-next-line
+    }, [upGeoJson]);
 
     return (<Map
     // eslint-disable-next-line

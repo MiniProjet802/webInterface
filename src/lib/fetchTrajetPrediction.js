@@ -4,13 +4,9 @@ function makeSoapRequest(dist, speed, tps_charge, nbCharge){
         <soapenv:Header/>
         <soapenv:Body>
             <min:calcTravelTime>
-                <!--Optional:-->
                 <min:distance>${dist}</min:distance>
-                <!--Optional:-->
                 <min:speed>${speed}</min:speed>
-                <!--Optional:-->
                 <min:chargeTime>${tps_charge}</min:chargeTime>
-                <!--Optional:-->
                 <min:nbCharge>${nbCharge}</min:nbCharge>
             </min:calcTravelTime>
         </soapenv:Body>
@@ -18,7 +14,26 @@ function makeSoapRequest(dist, speed, tps_charge, nbCharge){
     `
 }
 
-async function fetchTrajetPrediction(dist, speed, tps_charge, nbCharge) {
+function makeRestRequest(dist, speed, tps_charge, nbCharge){
+    return `http://localhost:7071/api/prediction/tpsTrajet?distance=${dist}&speed=${speed}&chargeTime=${tps_charge}&nbCharge=${nbCharge}`
+}
+
+async function fetchTrajetPredictionRest(dist, speed, tps_charge, nbCharge) {
+    const url = makeRestRequest(dist, speed, tps_charge, nbCharge);
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    });
+
+    const jsonResponse = await response.json();
+    return jsonResponse;
+    
+}
+
+async function fetchTrajetPredictionSoap(dist, speed, tps_charge, nbCharge) {
     const url = 'http://127.0.0.1:8000';
     const soapRequest = makeSoapRequest(dist, speed, tps_charge, nbCharge)
 
@@ -42,4 +57,4 @@ async function fetchTrajetPrediction(dist, speed, tps_charge, nbCharge) {
     return xmlResponse;
 }
 
-export { fetchTrajetPrediction }
+export { fetchTrajetPredictionSoap, fetchTrajetPredictionRest };

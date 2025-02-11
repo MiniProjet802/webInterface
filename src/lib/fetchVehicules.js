@@ -1,9 +1,9 @@
 function makeUrlListe(page, size, search = "") {
-    return `http://localhost:3002/list?page=${page}&size=${size}&search=${search}`;
+    return `http://localhost:7071/api/vehicles/list?page=${page}&size=${size}&search=${search}`;
 }
 
 function makeUrlDetails(id) {
-    return `http://localhost:3002/detail/${id}`;
+    return `http://localhost:7071/api/vehicles/details/${id}`;
 }
 
 async function fetchVehicleListe(page, size, search = "") {

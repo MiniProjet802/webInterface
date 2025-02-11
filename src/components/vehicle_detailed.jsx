@@ -30,7 +30,6 @@ export function VehicleDetail(props) {
                 </div>
                 <TrajetPrediction
                     speed={props.data.performance.top_speed}
-                    tpsCharge={1800}
                     chargeTimeDic={chargeTimeDic}
                 />
                 <div className='vehicle-detail-info-container'>

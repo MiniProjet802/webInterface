@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchVehicleDetails } from '../lib';
+import { fetchVehicleDetails, fetchVehicleListe } from '../lib';
 import { VehicleCard, VehicleDetail, HideButton } from './';
 
 export function VehicleSelector() {
@@ -10,11 +10,11 @@ export function VehicleSelector() {
     const [isHidden, setIsHidden] = useState(false);
 
     useEffect(() => {
-        // fetchVehicleListe(0, 100)
-        //     .then(data => {
-        //         console.log(data);
-        //         setVehicleListe(data);
-        //     });
+        fetchVehicleListe(0, 100)
+            .then(data => {
+                console.log(data);
+                setVehicleListe(data);
+            });
     }, []);
 
     const vehicleSelected = (id) => {
