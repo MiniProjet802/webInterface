@@ -28,6 +28,7 @@ export function SearchBar() {
                     country: 'FR'
                 }}
                 onRetrieve={(e) => onChange(e, true)}
+                onClear={() => setStartCoord(null)}
             />
         </div>
         <div className='search-item'>
@@ -40,6 +41,7 @@ export function SearchBar() {
                     country: 'FR'
                 }}
                 onRetrieve={(e) => onChange(e, false)}
+                onClear={() => setEndCoord(null)}
             />
         </div>
     </div>);

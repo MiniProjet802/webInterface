@@ -1,8 +1,8 @@
 function makeUrl(slat, slon, elat, elon) {
-    return `http://localhost:3004/route?slat=${slat}&slon=${slon}&elat=${elat}&elon=${elon}`;
+    return `http://localhost:7071/api/route?slat=${slat}&slon=${slon}&elat=${elat}&elon=${elon}`;
 }
 
-const CorrectedRoutApiUrl = "http://localhost:3004/route";
+const CorrectedRoutApiUrl = "http://localhost:7071/api/correctedroute";
 
 async function test(){
     console.log('test');
@@ -13,7 +13,14 @@ async function test(){
 
 async function fetchRouteGeoJson(slat, slon, elat, elon){
     const url = makeUrl(slat, slon, elat, elon);
-    const response = await fetch(url)
+    console.log("fetchRouteGeoJson", url);
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        }
+    })
     .catch(err => {
         console.log(err);
     });

@@ -17,6 +17,7 @@ export function Map() {
     const { startCoord, endCoord, setDist, setNbCharges } = useContext(SearchContext);
     const [geoJson, setGeoJson] = useState(null);
     const [upGeoJson, setUpGeoJson] = useState(false);
+    // eslint-disable-next-line
     const [prises, setPrises] = useState([]);
 
     useEffect(() => {
@@ -25,20 +26,26 @@ export function Map() {
                 setGeoJson(geoJson);
                 setUpGeoJson(!upGeoJson);
             });
+        }else{
+            setGeoJson(null);
+            setPrises([]);
+            setDist(null);
+            setNbCharges(null);
+            setUpGeoJson(!upGeoJson);
         }
-    }, [startCoord, endCoord, upGeoJson]);
+        // eslint-disable-next-line
+    }, [startCoord, endCoord]);
 
     useEffect(() => {
         if(geoJson) {
             fetchPrisesListe(geoJson.features[0].geometry.coordinates, 100)
-            .then((prises, dist) => {
-                console.log(prises);
-                console.log(dist);
-                setDist(dist);
-                setPrises(prises);
-                setNbCharges(prises.length);
+            .then((res) => {
+                console.log("res", res);
+                setDist(res.dist);
+                setPrises(res.prises);
+                setNbCharges(res.prises.length);
                 let coords = [startCoord];
-                prises.forEach(prise => {
+                res.prises.forEach(prise => {
                     coords.push([prise.xlongitude, prise.ylatitude]);
                 });
                 coords.push(endCoord);
@@ -50,7 +57,8 @@ export function Map() {
                 });
             });
         }
-    }, [upGeoJson, geoJson, startCoord, endCoord, setDist, setNbCharges]);
+        // eslint-disable-next-line
+    }, [upGeoJson]);
 
     return (<Map
     // eslint-disable-next-line
